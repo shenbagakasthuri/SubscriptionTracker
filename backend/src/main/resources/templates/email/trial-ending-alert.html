@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Free Trial Ending Soon Alert</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #f97316; border-radius: 8px;">
+        <h2 style="color: #ea580c;">Free Trial Guard Alert: Ending in 24 Hours!</h2>
+        <p>Hi <span th:text="${userName}">User</span>,</p>
+        <p>Your free trial for <strong th:text="${subscriptionName}">Service</strong> ends tomorrow! If you do not cancel, you will be automatically charged.</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Auto-charge Amount:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">₹<span th:text="${amount}">0.00</span></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Trial End Date:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;" th:text="${trialEndDate}">YYYY-MM-DD</td>
+            </tr>
+            <tr th:if="${cancelUrl != null and !cancelUrl.isEmpty()}">
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Direct Cancellation Link:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><a th:href="${cancelUrl}" target="_blank">Cancel Now to avoid charges</a></td>
+            </tr>
+        </table>
+        
+        <p style="font-size: 13px; color: #666;">Tracked with Free Trial Guard on Subscription Tracker.</p>
+    </div>
+</body>
+</html>

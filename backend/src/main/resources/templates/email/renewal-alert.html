@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscription Renewal Alert</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+        <h2 style="color: #2563eb;">Upcoming Subscription Renewal Alert</h2>
+        <p>Hi <span th:text="${userName}">User</span>,</p>
+        <p>This is a reminder that your subscription for <strong th:text="${subscriptionName}">Service</strong> is scheduled for auto-debit soon.</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Amount:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">₹<span th:text="${amount}">0.00</span></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Renewal Date:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;" th:text="${renewalDate}">YYYY-MM-DD</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Payment Method:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;" th:text="${paymentMethod}">UPI_AUTOPAY</td>
+            </tr>
+            <tr th:if="${cancelUrl != null and !cancelUrl.isEmpty()}">
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Cancel Subscription:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><a th:href="${cancelUrl}" target="_blank">Click here to cancel</a></td>
+            </tr>
+        </table>
+        
+        <p style="font-size: 13px; color: #666;">You are receiving this alert because you tracked this subscription on Subscription Tracker.</p>
+    </div>
+</body>
+</html>
