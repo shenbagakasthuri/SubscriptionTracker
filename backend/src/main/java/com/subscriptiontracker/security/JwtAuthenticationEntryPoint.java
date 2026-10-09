@@ -25,6 +25,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
         ApiResponse<Void> apiResponse = ApiResponse.error("Unauthorized: Full authentication is required to access this resource");
-        response.getOutputStream().println(objectMapper.writeValueAsString(apiResponse));
+        response.getOutputStream().write(objectMapper.writeValueAsBytes(apiResponse));
+        response.getOutputStream().flush();
     }
 }

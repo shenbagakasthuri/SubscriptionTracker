@@ -25,6 +25,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 
         ApiResponse<Void> apiResponse = ApiResponse.error("Access denied: You do not have permission to access this resource");
-        response.getOutputStream().println(objectMapper.writeValueAsString(apiResponse));
+        response.getOutputStream().write(objectMapper.writeValueAsBytes(apiResponse));
+        response.getOutputStream().flush();
     }
 }
