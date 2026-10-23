@@ -47,3 +47,11 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
     operationsSorter: method
+
+app:
+  notifications:
+    enabled: ${NOTIFICATION_ENABLED:true}
+    cron: ${NOTIFICATION_CRON:0 0 9 * * ?}
+    renewal-days-before: ${RENEWAL_REMINDER_DAYS:3}
+    trial-days-before: ${TRIAL_REMINDER_DAYS:1}
+    from-email: ${MAIL_FROM:notifications@subscriptiontracker.com}

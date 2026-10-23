@@ -54,6 +54,9 @@ class SubscriptionControllerTest {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+    @Autowired
+    private com.subscriptiontracker.repository.SubscriptionPriceHistoryRepository subscriptionPriceHistoryRepository;
+
     private User user1;
     private User user2;
     private String user1Token;
@@ -62,19 +65,22 @@ class SubscriptionControllerTest {
 
     @BeforeEach
     void setUp() {
-        userRepository.deleteAll();
+        subscriptionPriceHistoryRepository.deleteAll();
+        subscriptionRepository.deleteAll();
 
-        user1 = userRepository.save(User.builder()
-                .name("User One")
-                .email("user1@example.com")
-                .password(passwordEncoder.encode("Password123"))
-                .build());
+        user1 = userRepository.findByEmail("user1@example.com")
+                .orElseGet(() -> userRepository.save(User.builder()
+                        .name("User One")
+                        .email("user1@example.com")
+                        .password(passwordEncoder.encode("Password123"))
+                        .build()));
 
-        user2 = userRepository.save(User.builder()
-                .name("User Two")
-                .email("user2@example.com")
-                .password(passwordEncoder.encode("Password123"))
-                .build());
+        user2 = userRepository.findByEmail("user2@example.com")
+                .orElseGet(() -> userRepository.save(User.builder()
+                        .name("User Two")
+                        .email("user2@example.com")
+                        .password(passwordEncoder.encode("Password123"))
+                        .build()));
 
         user1Token = "Bearer " + jwtTokenProvider.generateToken(user1.getEmail(), user1.getId());
         user2Token = "Bearer " + jwtTokenProvider.generateToken(user2.getEmail(), user2.getId());

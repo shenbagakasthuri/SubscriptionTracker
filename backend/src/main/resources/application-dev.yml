@@ -20,3 +20,11 @@ spring:
 jwt:
   secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
   expiration-ms: 86400000
+
+app:
+  notifications:
+    enabled: ${NOTIFICATION_ENABLED:true}
+    cron: ${NOTIFICATION_CRON:0 0 9 * * ?}
+    renewal-days-before: ${RENEWAL_REMINDER_DAYS:3}
+    trial-days-before: ${TRIAL_REMINDER_DAYS:1}
+    from-email: ${MAIL_FROM:notifications@subscriptiontracker.com}

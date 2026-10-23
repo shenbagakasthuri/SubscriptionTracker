@@ -11,3 +11,11 @@ spring:
 jwt:
   secret: "dummy_test_jwt_secret_key_minimum_32_chars_long_12345"
   expiration-ms: 3600000
+
+app:
+  notifications:
+    enabled: false
+    cron: "0 0 9 * * ?"
+    renewal-days-before: 3
+    trial-days-before: 1
+    from-email: "test@subscriptiontracker.com"
