@@ -1,39 +1,215 @@
-# Subscription Tracker (Indian Market Edition)
+# Subly – Subscription Tracker
 
-A full-stack application for tracking subscriptions, avoiding unwanted auto-debits (UPI AutoPay, Cards), receiving 3-day and 1-day renewal alerts, and guarding against free trial charges.
+**Simple subscriptions. Smarter spending.**
 
-## Tech Stack
-- **Backend:** Spring Boot 3, Java 17, Maven, Spring Data JPA, Spring Security with JWT, MySQL, Lombok, springdoc-openapi, Spring Mail
-- **Frontend:** React (Vite), React Router, Axios, Recharts, Plain CSS Modules
+Subly is a full-stack subscription management application that helps users organize their recurring subscriptions, monitor monthly spending, track upcoming renewals, and review transaction history in one place.
 
-## Getting Started
+The application provides a centralized dashboard and subscription management system with secure user authentication.
 
-### 1. Database Setup
-Ensure MySQL is running on `localhost:3306` and create the database:
-```sql
-CREATE DATABASE IF NOT EXISTS subscription_tracker CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+## ✨ Features
+
+### 🔐 Authentication
+- User registration and login.
+- JWT-based authentication.
+- Protected application routes.
+- User-specific subscription data.
+
+### 📊 Dashboard
+- Overview of monthly subscription spending.
+- Active subscription count.
+- Upcoming renewals.
+- Active free trial count.
+- Spending breakdown by category.
+- Recent transaction overview.
+
+### 📅 Subscription Management
+- Add, view, update, and delete subscriptions.
+- Organize subscriptions by category.
+- Track billing cycles and payment methods.
+- Monitor subscription renewal dates.
+- Manage free trials and trial end dates.
+- Search, filter, and sort subscriptions.
+
+### 💳 Transaction Management
+- View imported transaction history.
+- Search transactions by merchant or account.
+- Filter by transaction type and payment method.
+- Filter transactions by date range.
+- Sort transactions by date or amount.
+- Review transaction details.
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend | React.js, JavaScript, HTML, CSS |
+| Build Tool | Vite |
+| Backend | Java, Spring Boot |
+| Database | MySQL |
+| Authentication | Spring Security, JWT |
+| API Communication | REST APIs, Axios |
+| Routing | React Router |
+| Version Control | Git, GitHub |
+
+## 📁 Project Structure
+
+```text
+SubscriptionTracker/
+│
+├── backend/
+│   ├── src/
+│   ├── pom.xml
+│   └── ...
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   ├── styles/
+│   │   └── utils/
+│   ├── package.json
+│   └── vite.config.js
+│
+├── docs/
+│   └── architecture-report.md
+│
+└── README.md
 ```
 
-### 2. Configuration & Profiles
-Copy `.env.example` to `.env` or use Spring profiles.
+## ⚙️ Getting Started
 
-Local secrets can be set in `backend/src/main/resources/application-local.yml` (which is gitignored).
+Follow these instructions to run Subly locally.
 
-To run the backend with `dev` and `local` profiles active:
+### Prerequisites
+
+Make sure you have installed:
+
+- Java 19 or compatible project-supported JDK.
+- Maven.
+- Node.js and npm.
+- MySQL Server.
+- Git.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/shenbagakasthuri/SubscriptionTracker.git
+```
+
+```bash
+cd SubscriptionTracker
+```
+
+### 2. Configure the Database
+
+1. Start your MySQL server.
+2. Create a database for Subly.
+3. Configure the database connection in the backend's local application configuration.
+4. Set the required database username and password.
+
+Keep local credentials and secrets outside Git.
+
+### 3. Run the Backend
+
+Open a terminal:
+
 ```bash
 cd backend
-mvn spring-boot:run -Dspring-boot.run.profiles=dev,local
 ```
-Or via java jar:
+
+Run the Spring Boot application:
+
 ```bash
-java -jar target/subscription-tracker-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev,local
-```
-Or export the environment variable:
-```bash
-$env:JWT_SECRET="your_secure_random_key_at_least_32_characters_long"
 mvn spring-boot:run
 ```
 
-### 3. Swagger API Documentation
-Once running, navigate to:
-[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+The backend runs locally at:
+
+```text
+http://localhost:8080
+```
+
+### 4. Run the Frontend
+
+Open another terminal from the project root:
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file inside the frontend directory:
+
+```env
+VITE_API_URL=http://localhost:8080
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open the local URL displayed in your terminal, usually:
+
+```text
+http://localhost:5173
+```
+
+## 🔗 Main API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/register` | Register a user |
+| POST | `/api/auth/login` | Authenticate a user |
+| GET | `/api/auth/me` | Get authenticated user |
+| GET | `/api/subscriptions` | Get subscriptions |
+| POST | `/api/subscriptions` | Create subscription |
+| GET | `/api/subscriptions/{id}` | Get subscription details |
+| PUT | `/api/subscriptions/{id}` | Update subscription |
+| DELETE | `/api/subscriptions/{id}` | Delete subscription |
+| POST | `/api/sms/parse` | Parse transaction message |
+| POST | `/api/sms/import` | Import transaction |
+| GET | `/api/sms/imports` | Get imported transactions |
+| GET | `/api/sms/subscription-suggestions` | Get subscription suggestions |
+
+Protected endpoints require a valid JWT bearer token.
+
+## 🔒 Security
+
+- JWT-based authentication.
+- Protected API endpoints.
+- User-specific data access.
+- Environment-based configuration for sensitive credentials.
+- Local environment files excluded from version control.
+
+## 🚀 Future Enhancements
+
+- Cloud deployment and public access.
+- Subscription renewal notifications.
+- Enhanced spending analytics and reports.
+- Improved subscription recommendations.
+- Additional payment and transaction integrations.
+
+## 👨‍💻 Author
+
+**Shenbaga Kasthuri R**
+
+Computer Science and Engineering – Internet of Things
+
+- GitHub: [@shenbagakasthuri](https://github.com/shenbagakasthuri)
+- Project Repository: [SubscriptionTracker](https://github.com/shenbagakasthuri/SubscriptionTracker)
+
+---
+
+<p align="center">
+  **Subly – Simple subscriptions. Smarter spending.**
+</p>
