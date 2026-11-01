@@ -34,3 +34,13 @@ frontend/pnpm-debug.log*
 # OS files
 .DS_Store
 Thumbs.db
+
+# Root Node dependencies
+node_modules/
+
+# Environment files
+.env.*
+!.env.example
+
+# Build outputs
+dist/

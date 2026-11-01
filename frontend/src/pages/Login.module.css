@@ -1,0 +1,270 @@
+
+.page {
+  min-height: calc(100vh - 76px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(
+    135deg,
+    #14213d 0%,
+    #174b55 48%,
+    #10b981 100%
+  );
+}
+
+
+.logo {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 23px;
+  font-weight: 800;
+  box-shadow: 0 5px 14px rgba(16, 185, 129, 0.2);
+}
+
+.brandName {
+  margin: 0;
+  color: #14213d;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.brandSubtitle {
+  display: block;
+  margin-top: 3px;
+  color: #64748b;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.heading {
+  margin-bottom: 27px;
+}
+
+.heading h1 {
+  margin: 0 0 8px;
+  color: #14213d;
+  font-size: 29px;
+  font-weight: 750;
+  letter-spacing: -0.9px;
+}
+
+.heading p {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.card form {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.field input {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid #dfe6ee;
+  border-radius: 10px;
+  outline: none;
+  background: #f8fafc;
+  color: #1e293b;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.field input::placeholder {
+  color: #9aa7b7;
+}
+
+.field input:focus {
+  background: #ffffff;
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.10);
+}
+
+.card button {
+  width: 100%;
+  margin-top: 5px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 6px 15px rgba(16, 185, 129, 0.18);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card button:hover:not(:disabled) {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 9px 20px rgba(16, 185, 129, 0.25);
+}
+
+.card button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 26px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.footer a {
+  color: #059669;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  padding: 11px 13px;
+  border: 1px solid #fecaca;
+  border-radius: 9px;
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 13px;
+}
+
+.bottomNote {
+  margin-top: 25px;
+  padding-top: 18px;
+  border-top: 1px solid #edf1f5;
+  color: #94a3b8;
+  font-size: 11px;
+  text-align: center;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding: 18px;
+  }
+
+  .card {
+    padding: 30px 23px 25px;
+    border-radius: 17px;
+  }
+
+  .brand {
+    margin-bottom: 31px;
+  }
+
+  .heading h1 {
+    font-size: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+  }
+}
+
+
+.card {
+  width: 100%;
+  max-width: 440px;
+  padding: 38px 40px 30px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  box-shadow: 0 24px 65px rgba(5, 20, 35, 0.25);
+  animation: cardEnter 0.45s ease both;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 9px;
+  margin-bottom: 35px;
+}
+
+.logo {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 27px;
+  font-weight: 800;
+  box-shadow: 0 7px 18px rgba(16, 185, 129, 0.25);
+}
+
+.brandName {
+  margin: 0;
+  color: #14213d;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.brandSubtitle {
+  display: block;
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.heading h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.heading p {
+  text-align: center;
+  margin: 0;
+  color: #64748b;
+}

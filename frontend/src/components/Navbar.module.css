@@ -1,0 +1,83 @@
+
+.navbar {
+  min-height: 82px;
+  padding: 16px 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #e7edf3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 23px;
+  font-weight: 800;
+  box-shadow: 0 5px 14px rgba(16, 185, 129, 0.2);
+}
+
+.brandInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  margin: 0;
+  color: #14213d;
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.7px;
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.tagline {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    min-height: 72px;
+    padding: 13px 18px;
+  }
+
+  .logo {
+    width: 39px;
+    height: 39px;
+    font-size: 21px;
+  }
+
+  .title {
+    font-size: 21px;
+  }
+
+  .subtitle {
+    font-size: 8px;
+  }
+
+  .tagline {
+    display: none;
+  }
+}
