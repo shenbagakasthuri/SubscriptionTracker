@@ -1,0 +1,29 @@
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+cors:
+  allowed-origins: ${FRONTEND_URL:https://subly-subscription-tracker.netlify.app}
+
+app:
+  notifications:
+    enabled: ${NOTIFICATION_ENABLED:false}
+    cron: ${NOTIFICATION_CRON:0 0 9 * * ?}
+    renewal-days-before: ${RENEWAL_REMINDER_DAYS:3}
+    trial-days-before: ${TRIAL_REMINDER_DAYS:1}
+    from-email: ${MAIL_FROM:notifications@subscriptiontracker.com}
