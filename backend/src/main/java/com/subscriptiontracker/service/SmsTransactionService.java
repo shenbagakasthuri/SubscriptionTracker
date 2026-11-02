@@ -14,5 +14,7 @@ public interface SmsTransactionService {
 
     SmsTransactionResponse getTransactionById(Long id, String userEmail);
 
+    void deleteTransaction(Long id, String userEmail);
+
     List<SubscriptionSuggestionResponse> getSubscriptionSuggestions(String userEmail);
 }

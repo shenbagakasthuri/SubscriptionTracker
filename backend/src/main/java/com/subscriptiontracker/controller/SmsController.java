@@ -67,6 +67,24 @@ public class SmsController {
         return ResponseEntity.ok(ApiResponse.success("Transaction retrieved successfully", transaction));
     }
 
+    @DeleteMapping("/imports/{id}")
+@Operation(
+        summary = "Delete an imported transaction",
+        description = "Deletes a transaction owned by the authenticated user"
+)
+public ResponseEntity<ApiResponse<Void>> deleteTransaction(
+        @PathVariable Long id,
+        Authentication authentication) {
+
+    String email = authentication.getName();
+
+    smsTransactionService.deleteTransaction(id, email);
+
+    return ResponseEntity.ok(
+            ApiResponse.success("Transaction deleted successfully", null)
+    );
+}
+
     @GetMapping("/subscription-suggestions")
     @Operation(summary = "Identify possible recurring payments", description = "Analyzes imported transactions to identify potential recurring subscriptions")
     public ResponseEntity<ApiResponse<List<SubscriptionSuggestionResponse>>> getSubscriptionSuggestions(

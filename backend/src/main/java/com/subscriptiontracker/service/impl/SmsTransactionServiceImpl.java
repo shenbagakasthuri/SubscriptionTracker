@@ -56,8 +56,7 @@ public class SmsTransactionServiceImpl implements SmsTransactionService {
                 parsed.getMerchant(),
                 parsed.getAmount(),
                 parsed.getTransactionDate(),
-                parsed.getDirection()
-        );
+                parsed.getDirection());
 
         // 3. Reject duplicate import
         if (smsTransactionRepository.existsByUserIdAndDeduplicationFingerprint(user.getId(), fingerprint)) {
@@ -85,7 +84,8 @@ public class SmsTransactionServiceImpl implements SmsTransactionService {
     @Transactional(readOnly = true)
     public List<SmsTransactionResponse> getUserTransactions(String userEmail) {
         User user = getUserByEmail(userEmail);
-        List<SmsTransaction> transactions = smsTransactionRepository.findByUserIdOrderByTransactionDateDesc(user.getId());
+        List<SmsTransaction> transactions = smsTransactionRepository
+                .findByUserIdOrderByTransactionDateDesc(user.getId());
         return smsTransactionMapper.toResponseList(transactions);
     }
 
@@ -97,6 +97,18 @@ public class SmsTransactionServiceImpl implements SmsTransactionService {
                 .orElseThrow(() -> new ResourceNotFoundException("Transaction not found with id: " + id));
 
         return smsTransactionMapper.toResponse(transaction);
+    }
+
+    @Override
+    @Transactional
+    public void deleteTransaction(Long id, String userEmail) {
+        User user = getUserByEmail(userEmail);
+
+        SmsTransaction transaction = smsTransactionRepository
+                .findByIdAndUserId(id, user.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Transaction not found with id: " + id));
+
+        smsTransactionRepository.delete(transaction);
     }
 
     @Override
@@ -140,7 +152,8 @@ public class SmsTransactionServiceImpl implements SmsTransactionService {
 
             List<Long> intervals = new ArrayList<>();
             for (int i = 1; i < group.size(); i++) {
-                long days = ChronoUnit.DAYS.between(group.get(i - 1).getTransactionDate(), group.get(i).getTransactionDate());
+                long days = ChronoUnit.DAYS.between(group.get(i - 1).getTransactionDate(),
+                        group.get(i).getTransactionDate());
                 intervals.add(days);
             }
 
@@ -156,14 +169,16 @@ public class SmsTransactionServiceImpl implements SmsTransactionService {
                         .suggestedCategory(category)
                         .suggestedAmount(latest.getAmount())
                         .suggestedBillingCycle(cycle)
-                        .suggestedPaymentMethod(latest.getPaymentMethod() != null ? latest.getPaymentMethod() : PaymentMethod.UPI_AUTOPAY)
+                        .suggestedPaymentMethod(latest.getPaymentMethod() != null ? latest.getPaymentMethod()
+                                : PaymentMethod.UPI_AUTOPAY)
                         .occurrenceCount(group.size())
                         .confidence(consistentAmount ? "HIGH" : "MEDIUM")
                         .lastTransactionDate(latest.getTransactionDate())
                         .nextPredictedRenewalDate(nextDate)
                         .transactionIds(group.stream().map(SmsTransaction::getId).toList())
                         .alreadySubscribed(alreadySubscribed)
-                        .explanation("Observed recurring " + cycle.name().toLowerCase() + " charges (" + group.size() + " times) of ₹" + latest.getAmount() + " at " + latest.getMerchant())
+                        .explanation("Observed recurring " + cycle.name().toLowerCase() + " charges (" + group.size()
+                                + " times) of ₹" + latest.getAmount() + " at " + latest.getMerchant())
                         .build());
             }
         }
@@ -231,7 +246,8 @@ public class SmsTransactionServiceImpl implements SmsTransactionService {
     }
 
     private String normalizeMerchant(String merchant) {
-        if (merchant == null) return "";
+        if (merchant == null)
+            return "";
         return merchant.toLowerCase().replaceAll("[^a-z0-9]", "");
     }
 
@@ -260,7 +276,8 @@ public class SmsTransactionServiceImpl implements SmsTransactionService {
             StringBuilder hexString = new StringBuilder();
             for (byte b : hash) {
                 String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
+                if (hex.length() == 1)
+                    hexString.append('0');
                 hexString.append(hex);
             }
             return hexString.toString();
